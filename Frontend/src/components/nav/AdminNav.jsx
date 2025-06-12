@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router";
-export const AdminNav = () => {
+
+export const AdminNav = ({ picture }) => {
   const { logout } = useAuth0();
 
   return (
@@ -94,8 +95,12 @@ export const AdminNav = () => {
           >
             <div className="w-10 rounded-full">
               <img
-                alt="admin picture"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                alt="picture"
+                src={picture || "/noProfilePhoto.png"}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/noProfilePhoto.png";
+                }}
               />
             </div>
           </div>
@@ -105,6 +110,14 @@ export const AdminNav = () => {
             tabIndex={0}
             className="menu menu-md dropdown-content shadow-md bg-white/10 backdrop-blur rounded-box z-1 mt-3 w-52 p-2"
           >
+            <li>
+              <Link to="/profile">Perfil</Link>
+            </li>
+
+            <li>
+              <Link to="/settings">Configuraciones</Link>
+            </li>
+
             <li>
               <button
                 onClick={() =>

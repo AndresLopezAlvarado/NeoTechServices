@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router";
 
-export const UserNav = () => {
+export const UserNav = ({ picture }) => {
   const { logout } = useAuth0();
 
   return (
@@ -97,8 +97,12 @@ export const UserNav = () => {
           >
             <div className="w-10 rounded-full">
               <img
-                alt="user picture"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                alt="picture"
+                src={picture || "/noProfilePhoto.png"}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/noProfilePhoto.png";
+                }}
               />
             </div>
           </div>

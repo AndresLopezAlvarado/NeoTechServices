@@ -15,11 +15,6 @@ const authSlice = createSlice({
       state.user = action.payload;
     },
 
-    //Es necesario?, creo que no lo estoy usando
-    clearUser: (state, action) => {
-      state.user = null;
-    },
-
     logout: (state) => {
       state.token = null;
       state.user = null;
@@ -27,7 +22,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setToken, setUser, clearUser, logout } = authSlice.actions;
+export const { setToken, setUser, logout } = authSlice.actions;
 
 export const selectToken = (state) => state.auth.token;
 export const selectUser = (state) => state.auth.user;

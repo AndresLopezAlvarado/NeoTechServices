@@ -16,19 +16,19 @@ const adminServices = [
     title: "Usuarios",
     description: "Gestiona los perfiles de usuario y roles asignados.",
     icon: <FaUsersCog className="text-4xl text-blue-600" />,
-    to: "users",
+    to: "/users",
   },
   {
     title: "Órdenes de Servicio",
     description: "Administra solicitudes técnicas y su estado.",
     icon: <FaClipboardList className="text-4xl text-blue-600" />,
-    to: "order",
+    to: "/order",
   },
   {
     title: "Reportes",
     description: "Revisa el rendimiento y estadísticas del sistema.",
     icon: <FaChartLine className="text-4xl text-blue-600" />,
-    to: "report",
+    to: "/report",
   },
 ];
 
@@ -38,28 +38,28 @@ const userServices = [
     description:
       "Recibe acompañamiento profesional en tecnología, sistemas y productividad digital.",
     icon: <FaUserTie className="text-4xl text-blue-600" />,
-    to: "consultancies",
+    to: "/consultancies",
   },
   {
     title: "Servicio Técnico",
     description:
       "Diagnóstico, reparación y mantenimiento de equipos con garantía.",
     icon: <FaTools className="text-4xl text-blue-600" />,
-    to: "technicalService",
+    to: "/technicalService",
   },
   {
     title: "Aplicaciones Web",
     description:
       "Desarrollamos soluciones digitales personalizadas para tu negocio o proyecto.",
     icon: <FaLaptopCode className="text-4xl text-blue-600" />,
-    to: "webApps",
+    to: "/webApps",
   },
   {
     title: "Venta de Equipos",
     description:
       "Compra equipos y herramientas tecnológicas confiables a buen precio.",
     icon: <FaShoppingCart className="text-4xl text-blue-600" />,
-    to: "equipmentSale",
+    to: "/equipmentSale",
   },
 ];
 
@@ -83,7 +83,7 @@ export const Dashboard = () => {
 
               <img
                 className="w-24 h-24 rounded-full mx-auto border-4 border-white"
-                src={user?.picture}
+                src={user?.picture.secure_url}
                 alt={user?.name}
                 onError={(e) => {
                   e.target.onerror = null;
@@ -166,7 +166,7 @@ export const Dashboard = () => {
 
               <img
                 className="w-24 h-24 rounded-full mx-auto border-4 border-white"
-                src={user?.picture}
+                src={user?.picture.secure_url}
                 alt={user?.name}
                 onError={(e) => {
                   e.target.onerror = null;
