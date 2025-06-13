@@ -65,31 +65,37 @@ const userServices = [
 
 export const Dashboard = () => {
   const role = useSelector(selectUserRole);
-  const user = useSelector(selectUser);
+  const stateUser = useSelector(selectUser);
 
   return (
     <>
       {role === "admin" ? (
+        // Admin
         <main className="h-full">
-          <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-center">
-            <div className="max-w-4xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                Bienvenido, {user?.name}
-              </h1>
-
-              <p className="text-lg mb-6">
-                Panel de administración del sistema.
-              </p>
-
+          {/* Hero */}
+          <section className="hero bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+            <div className="hero-content flex-col lg:flex-row">
               <img
-                className="w-24 h-24 rounded-full mx-auto border-4 border-white"
-                src={user?.picture.secure_url}
-                alt={user?.name}
+                alt="picture"
+                src={stateUser.picture.secure_url}
+                className="h-40 lg:h-52 max-w-sm rounded-full shadow-2xl"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = "/noProfilePhoto.png";
                 }}
               />
+
+              <div className="flex flex-col items-center lg:items-start">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-center">
+                  Welcome, {stateUser?.name}
+                </h1>
+
+                <p className="py-6">System Administration Panel</p>
+
+                <Link to="/profile" className="btn btn-primary">
+                  Go to profile
+                </Link>
+              </div>
             </div>
           </section>
 
@@ -155,25 +161,32 @@ export const Dashboard = () => {
           </section>
         </main>
       ) : (
+        // User
         <main className="h-full">
-          <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-center">
-            <div className="max-w-4xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                Bienvenido, {user?.name}
-              </h1>
-
-              <p className="text-lg mb-6">Gracias por confiar en nosotros.</p>
-
+          {/* Hero */}
+          <section className="hero bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+            <div className="hero-content flex-col lg:flex-row">
               <img
-                className="w-24 h-24 rounded-full mx-auto border-4 border-white"
-                src={user?.picture.secure_url}
-                alt={user?.name}
+                alt="picture"
+                src={stateUser.picture.secure_url}
+                className="h-40 lg:h-52 max-w-sm rounded-full shadow-2xl"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = "/noProfilePhoto.png";
-                  // e.target.style.display = "none";
                 }}
               />
+
+              <div className="flex flex-col items-center lg:items-start">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold break-words whitespace-normal">
+                  Welcome, {stateUser?.name}
+                </h1>
+
+                <p className="py-6">Thank you for trusting us!</p>
+
+                <Link to="/profile" className="btn btn-primary">
+                  Go to profile
+                </Link>
+              </div>
             </div>
           </section>
 

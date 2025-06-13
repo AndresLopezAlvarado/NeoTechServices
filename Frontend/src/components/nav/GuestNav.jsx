@@ -57,11 +57,14 @@ export const GuestNav = () => {
 
       {/* Logo */}
       <div className="navbar-center">
-        <Link to="/" className="btn btn-ghost text-xl">
+        <Link
+          to="/"
+          className="text-xl sm:text-3xl md:text-3xl lg:text-4xl font-bold hover:text-blue-600 flex gap-1 items-center justify-center transition"
+        >
           <img
-            className="h-6 w-6 rounded-sm"
+            alt="logo"
             src="/neoTechServicesLogo.png"
-            alt="Logo"
+            className="h-7 w-7 lg:h-10 lg:w-10 rounded-md"
           />
           NeoTech Services
         </Link>

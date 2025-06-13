@@ -39,11 +39,19 @@ export const authApi = createApi({
       invalidatesTags: ["Users"],
     }),
 
+    updatePicture: builder.mutation({
+      query: ({ newPicture }) => ({
+        url: "/user/picture",
+        method: "POST",
+        body: { newPicture },
+      }),
+    }),
+
     updateProfile: builder.mutation({
-      query: ({ newName, newPicture }) => ({
+      query: ({ newName }) => ({
         url: "/user/profile",
         method: "POST",
-        body: { newName, newPicture },
+        body: { newName },
       }),
     }),
   }),
@@ -53,5 +61,6 @@ export const {
   useLoadUserMutation,
   useGetUsersQuery,
   useUpdateRoleMutation,
+  useUpdatePictureMutation,
   useUpdateProfileMutation,
 } = authApi;

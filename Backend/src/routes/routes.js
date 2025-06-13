@@ -72,13 +72,12 @@ router.post(
   }
 );
 
-router.post("/user/profile", checkJWT, async (req, res) => {
+router.post("/user/picture", checkJWT, async (req, res) => {
   const auth0Id = req.auth.payload.sub;
-  const { newName, newPicture } = req.body;
+  const { newPicture } = req.body;
 
   try {
     let user = await User.findOne({ auth0Id });
-
     if (!user) return res.status(404).json({ message: "User not found!" });
 
     if (
@@ -88,17 +87,31 @@ router.post("/user/profile", checkJWT, async (req, res) => {
     )
       await deletePicture(user.picture.public_id);
 
-    if (newName) user.name = newName;
     if (newPicture) user.picture = newPicture;
     await user.save();
+    user = user.toObject();
+    delete user.auth0Id;
+    delete user.__v;
+    res.status(200).json(user);
+  } catch (error) {}
+});
 
+router.post("/user/profile", checkJWT, async (req, res) => {
+  const auth0Id = req.auth.payload.sub;
+  const { newName } = req.body;
+
+  try {
+    let user = await User.findOne({ auth0Id });
+    if (!user) return res.status(404).json({ message: "User not found!" });
+    if (newName) user.name = newName;
+    await user.save();
     user = user.toObject();
     delete user.auth0Id;
     delete user.__v;
     res.status(200).json(user);
   } catch (error) {
-    console.error("Error updating user:", error);
-    return res.status(500).json({ message: "Error updating user" });
+    console.error("Error updating profile:", error);
+    return res.status(500).json({ message: "Error updating profile" });
   }
 });
 

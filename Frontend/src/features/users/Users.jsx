@@ -159,8 +159,12 @@ export const Users = () => {
                   <legend className="fieldset-legend">Role:</legend>
 
                   <select
-                    value={selectedRole}
-                    onChange={(e) => setSelectedRole(e.target.value)}
+                    value={selectedRole === "admin" ? "Administrator" : "User"}
+                    onChange={(e) => {
+                      if (e.target.value === "Administrator")
+                        setSelectedRole("admin");
+                      else setSelectedRole("user");
+                    }}
                     className="select select-sm select-ghost"
                   >
                     <option>Administrator</option>

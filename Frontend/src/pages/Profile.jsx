@@ -1,98 +1,105 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser, setUser } from "../features/auth/authSlice.js";
-import { useUpdateProfileMutation } from "../features/api/authApi.js";
+import {
+  useUpdateProfileMutation,
+  useUpdatePictureMutation,
+} from "../features/api/authApi.js";
 import { useEffect, useState } from "react";
 import { CLOUD_NAME, UPLOAD_PRESET } from "../../config.js";
 import toast, { Toaster } from "react-hot-toast";
 
+const uploadToCloudinary = async (newPicture) => {
+  if (!newPicture) return null;
+
+  const formData = new FormData();
+  formData.append("file", newPicture);
+  formData.append("upload_preset", UPLOAD_PRESET);
+  formData.append("folder", "profilePictures");
+  formData.append("public_id", `${Date.now()}`);
+
+  try {
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+      { method: "POST", body: formData }
+    );
+
+    const data = await response.json();
+    return { secure_url: data.secure_url, public_id: data.public_id };
+  } catch (error) {
+    console.error("Cloudinary upload error:", error);
+  }
+};
+
 export const Profile = () => {
   const dispatch = useDispatch();
   const stateUser = useSelector(selectUser);
-  const [updateProfile] = useUpdateProfileMutation();
-  const [newName, setNewName] = useState(stateUser.name);
-  const [newPicture, setNewPicture] = useState(null);
-  const hasChanges = newName && (newName !== stateUser.name || newPicture);
+  const [updatePicture] = useUpdatePictureMutation();
+  const [updateProfile, { isLoading: isUpdatingProfile }] =
+    useUpdateProfileMutation();
+  const [newName, setNewName] = useState("");
 
   useEffect(() => {
-    setNewName(stateUser.name);
-    setNewPicture(null);
+    if (stateUser?.name) setNewName(stateUser.name);
   }, [stateUser]);
 
-  const infoMessage = () => {
-    if (!newName.trim()) return "¡Name cannot be empty!";
-    if (newName === stateUser.name && !newPicture)
-      return "You can edit your name";
-    return "Click 'Save' to apply the changes.";
-  };
-
-  const handlePictureChange = (e) => {
-    const picture = e.target.files[0];
-    if (picture) setNewPicture(picture);
-  };
-
-  const handleNameChange = (e) => setNewName(e.target.value);
-
-  const uploadToCloudinary = async (newPicture) => {
-    const formData = new FormData();
-    formData.append("file", newPicture);
-    formData.append("upload_preset", UPLOAD_PRESET);
-    formData.append("folder", "profilePictures");
-    formData.append("public_id", `${Date.now()}`);
+  const handlePictureChange = async (e) => {
+    const newPicture = e.target.files[0];
+    if (!newPicture) return;
 
     try {
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-        { method: "POST", body: formData }
-      );
-
-      const data = await response.json();
-      return { secure_url: data.secure_url, public_id: data.public_id };
-    } catch (error) {
-      console.error("Cloudinary upload error:", error);
-    }
-  };
-
-  const onUpdateProfile = async () => {
-    let picture = stateUser.picture;
-
-    if (newPicture) {
-      try {
-        picture = await toast.promise(uploadToCloudinary(newPicture), {
-          loading: "Guardando...",
-          success: <b>Imagen subida correctamente.</b>,
-          error: <b>Error al subir la imagen.</b>,
-        });
-      } catch (error) {
-        console.error("Error al subir imagen:", error);
-      }
-    }
-
-    try {
+      const uploadedPicture = await uploadToCloudinary(newPicture);
+      if (!uploadedPicture) return;
+      
       const { data } = await toast.promise(
-        updateProfile({ newName, newPicture: picture }),
+        updatePicture({ newPicture: uploadedPicture }),
         {
-          loading: "Guardando...",
-          success: <b>Nombre actualizado.</b>,
-          error: <b>Error al actualizar el perfil.</b>,
+          loading: "Uploading picture...",
+          success: <b>Picture uploaded successfully.</b>,
+          error: <b>Error uploading picture.</b>,
         }
       );
 
       dispatch(setUser(data));
     } catch (error) {
-      console.error("Error al actualizar el usuario:", error);
+      console.error("Error uploading picture:", error);
+    }
+  };
+
+  const handleNameChange = (e) => setNewName(e.target.value);
+
+  const infoMessage = () => {
+    if (!newName.trim()) return "¡Name cannot be empty!";
+    if (newName !== stateUser.name) return "Click 'Save' to apply the changes.";
+    return "You can edit your name";
+  };
+
+  const onUpdateProfile = async () => {
+    try {
+      const { data } = await toast.promise(updateProfile({ newName }), {
+        loading: "Updating profile...",
+        success: <b>Profile updated successfully.</b>,
+        error: <b>Error updating profile.</b>,
+      });
+
+      dispatch(setUser(data));
+    } catch (error) {
+      console.error("Error updating profile:", error);
     }
   };
 
   return (
     stateUser && (
       <main className="p-4 flex justify-center">
-        <div className="w-fit max-w-4xl flex flex-col lg:flex-row rounded-lg shadow-md">
+        <div className="w-80 lg:w-3/4 flex flex-col lg:flex-row rounded-lg shadow-lg">
           {/* Picture */}
-          <div className="w-full lg:w-1/3 flex items-center justify-center">
-            <label htmlFor="fileUpload" className="cursor-pointer">
+          <div className="w-full lg:w-96 p-3 flex items-center justify-center">
+            <label
+              htmlFor="fileUpload"
+              className="w-full rounded-lg cursor-pointer"
+            >
               <img
                 alt="picture"
-                className="object-cover rounded-lg h-80 w-full lg:w-96 max-h-96"
+                className="w-full border border-blue-300 hover:border-2 hover:border-blue-600 object-cover rounded-lg transition"
                 src={stateUser.picture.secure_url || "/noProfilePhoto.png"}
                 onError={(e) => {
                   e.target.onerror = null;
@@ -123,8 +130,9 @@ export const Profile = () => {
                 value={newName}
                 onChange={handleNameChange}
                 placeholder="Type your name"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-green-200 focus:outline-none"
+                className="w-full px-4 py-2 text-gray-800 border border-blue-300 rounded-md focus:ring focus:ring-blue-600 focus:outline-none"
               />
+
               <p className="text-xs text-gray-500 mt-1">{infoMessage()}</p>
             </div>
 
@@ -138,13 +146,17 @@ export const Profile = () => {
             </div>
 
             {/* Button */}
-            {hasChanges && (
+            {newName.trim() !== "" && newName !== stateUser.name && (
               <div className="pt-2 text-right">
                 <button
                   className="px-5 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition cursor-pointer"
                   onClick={onUpdateProfile}
                 >
-                  Save
+                  {isUpdatingProfile ? (
+                    <span className="loading loading-ring loading-xl"></span>
+                  ) : (
+                    "Save"
+                  )}
                 </button>
               </div>
             )}

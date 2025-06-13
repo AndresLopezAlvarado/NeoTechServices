@@ -40,23 +40,19 @@ const services = [
 export const Home = () => {
   return (
     <main className="h-full">
-      <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-center">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Impulsando tu mundo digital
-          </h1>
+      {/* Hero */}
+      <section className="hero bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+        <div className="hero-content text-center">
+          <div className="max-w-md">
+            <h1 className="text-5xl font-bold">Powering your digital world</h1>
 
-          <p className="text-lg mb-8">
-            Desarrollamos, asesoramos, reparamos y vendemos para que tu
-            tecnología funcione al 100%.
-          </p>
+            <p className="py-6">
+              We develop, advise, repair, and sell so that your technology works
+              at 100%.
+            </p>
 
-          <Link
-            to="/portfolio"
-            className="px-6 py-3 bg-white hover:bg-blue-100 text-blue-600 font-semibold rounded-full shadow transition"
-          >
-            Ir al Portafolio
-          </Link>
+            <button className="btn btn-primary">Go to Portfolio</button>
+          </div>
         </div>
       </section>
 

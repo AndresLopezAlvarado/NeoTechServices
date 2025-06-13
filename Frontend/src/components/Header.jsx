@@ -8,15 +8,15 @@ import { GuestNav } from "./nav/GuestNav";
 const Header = () => {
   const { isAuthenticated } = useAuth0();
   const role = useSelector(selectUserRole);
-  const user = useSelector(selectUser);
+  const stateUser = useSelector(selectUser);
 
   return (
     <nav className="navbar fixed top-0 z-50 shadow-md bg-white/10 backdrop-blur">
-      {isAuthenticated && user ? (
+      {isAuthenticated && stateUser ? (
         role === "admin" ? (
-          <AdminNav picture={user.picture.secure_url} />
+          <AdminNav picture={stateUser.picture.secure_url} />
         ) : (
-          <UserNav picture={user.picture.secure_url} />
+          <UserNav picture={stateUser.picture.secure_url} />
         )
       ) : (
         <GuestNav />
