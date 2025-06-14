@@ -97,7 +97,10 @@ router.post("/user/picture", checkJWT, async (req, res) => {
     console.log(user);
 
     res.status(200).json(user);
-  } catch (error) {}
+  } catch (error) {
+    console.error("Error uploading picture:", error);
+    return res.status(500).json({ message: "Error uploading picture" });
+  }
 });
 
 router.post("/user/profile", checkJWT, async (req, res) => {
