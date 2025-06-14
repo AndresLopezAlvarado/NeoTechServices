@@ -75,6 +75,7 @@ router.post(
 router.post("/user/picture", checkJWT, async (req, res) => {
   const auth0Id = req.auth.payload.sub;
   const { newPicture } = req.body;
+  console.log(newPicture);
 
   try {
     let user = await User.findOne({ auth0Id });
@@ -92,6 +93,9 @@ router.post("/user/picture", checkJWT, async (req, res) => {
     user = user.toObject();
     delete user.auth0Id;
     delete user.__v;
+
+    console.log(user);
+
     res.status(200).json(user);
   } catch (error) {}
 });
