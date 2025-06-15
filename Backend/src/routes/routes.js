@@ -33,7 +33,9 @@ router.post("/auth/load", checkJWT, async (req, res) => {
     return res.status(200).json(user);
   } catch (error) {
     console.error("Error loading user:", error);
-    return res.status(500).json({ message: "Error loading user" });
+    return res
+      .status(500)
+      .json({ message: "Error loading user", error: error });
   }
 });
 
@@ -43,7 +45,9 @@ router.get("/admin/users", checkJWT, checkRole(["admin"]), async (req, res) => {
     return res.status(200).json(users);
   } catch (error) {
     console.error("Error getting users:", error);
-    return res.status(500).json({ message: "Error getting users" });
+    return res
+      .status(500)
+      .json({ message: "Error getting users", error: error });
   }
 });
 
@@ -67,7 +71,9 @@ router.post(
       res.status(200).json(updatedUser);
     } catch (error) {
       console.error("Error changing role:", error);
-      return res.status(500).json({ message: "Error changing role" });
+      return res
+        .status(500)
+        .json({ message: "Error changing role", error: error });
     }
   }
 );
@@ -99,7 +105,9 @@ router.post("/user/picture", checkJWT, async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     console.error("Error uploading picture:", error);
-    return res.status(500).json({ message: "Error uploading picture" });
+    return res
+      .status(500)
+      .json({ message: "Error uploading picture", error: error });
   }
 });
 
@@ -118,7 +126,9 @@ router.post("/user/profile", checkJWT, async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     console.error("Error updating profile:", error);
-    return res.status(500).json({ message: "Error updating profile" });
+    return res
+      .status(500)
+      .json({ message: "Error updating profile", error: error });
   }
 });
 
