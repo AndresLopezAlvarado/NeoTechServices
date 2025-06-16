@@ -32,16 +32,16 @@ export const UserNav = ({ picture }) => {
             className="menu menu-md dropdown-content shadow-md bg-white/10 backdrop-blur rounded-box z-1 mt-3 w-52 p-2"
           >
             <li>
-              <Link to={"/consultancies"}>Asesorías</Link>
+              <Link to={"/consultancies"}>Consultancies</Link>
             </li>
             <li>
-              <Link to={"/technicalService"}>Servicio Técnico</Link>
+              <Link to={"/technicalService"}>Technical service</Link>
             </li>
             <li>
-              <Link to={"/webApps"}>Aplicaciones Web</Link>
+              <Link to={"/webApps"}>Web apps</Link>
             </li>
             <li>
-              <Link to={"/equipmentSale"}>Venta de Equipos</Link>
+              <Link to={"/equipmentSale"}>Equipment sale</Link>
             </li>
             <li>
               <Link to={"/portfolio"}>Portfolio</Link>
@@ -117,11 +117,11 @@ export const UserNav = ({ picture }) => {
             className="menu menu-md dropdown-content shadow-md bg-white/10 backdrop-blur rounded-box z-1 mt-3 w-52 p-2"
           >
             <li>
-              <Link to="/profile">Perfil</Link>
+              <Link to="/profile">Profile</Link>
             </li>
 
             <li>
-              <Link to="/settings">Configuraciones</Link>
+              <Link to="/settings">Settings</Link>
             </li>
 
             <li>
@@ -133,7 +133,7 @@ export const UserNav = ({ picture }) => {
                   });
                 }}
               >
-                Cerrar sesión
+                Log out
               </button>
             </li>
           </ul>

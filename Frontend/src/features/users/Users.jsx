@@ -3,6 +3,7 @@ import { selectToken } from "../auth/authSlice";
 import { useGetUsersQuery, useUpdateRoleMutation } from "./usersEndpoints";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { Loader } from "../../components/Loader";
 
 export const Users = () => {
   const token = useSelector(selectToken);
@@ -27,13 +28,13 @@ export const Users = () => {
             role: selectedRole,
           }).unwrap(),
           {
-            loading: "Saving...",
-            success: <b>{`Usuario ${userInfo.name} ha sido actualizado`}</b>,
-            error: <b>No se pudo actualizar el rol.</b>,
+            loading: "Updating...",
+            success: <b>Role updated successfully.</b>,
+            error: <b>Error updating role.</b>,
           }
         );
       } catch (error) {
-        console.error("Error al actualizar rol del usuario:", error);
+        console.error("Error updating role:", error);
       }
     }
 
@@ -41,12 +42,12 @@ export const Users = () => {
     setSelectedRole("");
   };
 
-  if (isLoading || isFetching) return <p>Cargando usuarios...</p>;
+  if (isLoading || isFetching) return <Loader message="Loading users..." />;
 
-  if (error) return <p>Error al cargar usuarios</p>;
+  if (error) return <Loader message="Error loading users." />;
 
   if (isSuccess && (!users || users.length === 0))
-    return <p>No hay usuarios para mostrar.</p>;
+    return <Loader message="There are no users!." />;
 
   if (isSuccess)
     return (
@@ -186,10 +187,10 @@ export const Users = () => {
                 onClick={onCloseModal}
               >
                 {isUpdatingRole
-                  ? "Guardando..."
+                  ? "Saving..."
                   : selectedRole !== userInfo?.role
-                  ? "Guardar"
-                  : "Cerrar"}
+                  ? "Save"
+                  : "Close"}
               </label>
             </div>
           </div>

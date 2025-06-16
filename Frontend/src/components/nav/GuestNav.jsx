@@ -33,19 +33,19 @@ export const GuestNav = () => {
             className="menu menu-md dropdown-content shadow-md bg-white/10 backdrop-blur rounded-box z-1 mt-3 w-52 p-2"
           >
             <li>
-              <Link to={"/consultancies"}>Asesorías</Link>
+              <Link to={"/consultancies"}>Consultancies</Link>
             </li>
 
             <li>
-              <Link to={"/technicalService"}>Servicio Técnico</Link>
+              <Link to={"/technicalService"}>Technical service</Link>
             </li>
 
             <li>
-              <Link to={"/webApps"}>Aplicaciones Web</Link>
+              <Link to={"/webApps"}>Web apps</Link>
             </li>
 
             <li>
-              <Link to={"/equipmentSale"}>Venta de Equipos</Link>
+              <Link to={"/equipmentSale"}>Equipment sale</Link>
             </li>
 
             <li>
@@ -76,7 +76,7 @@ export const GuestNav = () => {
           className="btn btn-ghost text-xl"
           onClick={() => loginWithRedirect()}
         >
-          Log In
+          Log in
         </button>
       </div>
     </>

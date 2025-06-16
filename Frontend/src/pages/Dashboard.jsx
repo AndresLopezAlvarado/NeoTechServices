@@ -13,20 +13,20 @@ import {
 
 const adminServices = [
   {
-    title: "Usuarios",
-    description: "Gestiona los perfiles de usuario y roles asignados.",
+    title: "Users",
+    description: "Manage user profiles and assigned roles.",
     icon: <FaUsersCog className="text-4xl text-blue-600" />,
     to: "/users",
   },
   {
-    title: "Órdenes de Servicio",
-    description: "Administra solicitudes técnicas y su estado.",
+    title: "Service Orders",
+    description: "Manage technical requests and their status.",
     icon: <FaClipboardList className="text-4xl text-blue-600" />,
     to: "/order",
   },
   {
-    title: "Reportes",
-    description: "Revisa el rendimiento y estadísticas del sistema.",
+    title: "Reports",
+    description: "Check system performance and statistics.",
     icon: <FaChartLine className="text-4xl text-blue-600" />,
     to: "/report",
   },
@@ -34,30 +34,30 @@ const adminServices = [
 
 const userServices = [
   {
-    title: "Asesorías",
+    title: "Consultancies",
     description:
-      "Recibe acompañamiento profesional en tecnología, sistemas y productividad digital.",
+      "Receive professional support in technology, systems, and digital productivity.",
     icon: <FaUserTie className="text-4xl text-blue-600" />,
     to: "/consultancies",
   },
   {
-    title: "Servicio Técnico",
+    title: "Technical Service",
     description:
-      "Diagnóstico, reparación y mantenimiento de equipos con garantía.",
+      "Diagnostics, repair, and maintenance of equipment with warranty.",
     icon: <FaTools className="text-4xl text-blue-600" />,
     to: "/technicalService",
   },
   {
-    title: "Aplicaciones Web",
+    title: "Web Apps",
     description:
-      "Desarrollamos soluciones digitales personalizadas para tu negocio o proyecto.",
+      "We develop customized digital solutions for your business or project.",
     icon: <FaLaptopCode className="text-4xl text-blue-600" />,
     to: "/webApps",
   },
   {
-    title: "Venta de Equipos",
+    title: "Equipment Sale",
     description:
-      "Compra equipos y herramientas tecnológicas confiables a buen precio.",
+      "Buy reliable technological equipment and tools at a good price.",
     icon: <FaShoppingCart className="text-4xl text-blue-600" />,
     to: "/equipmentSale",
   },
@@ -102,7 +102,7 @@ export const Dashboard = () => {
           <section className="py-16 px-6">
             <div className="max-w-6xl mx-auto text-center">
               <h2 className="text-3xl font-bold mb-12">
-                Gestión Administrativa
+                Administrative Management
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -131,32 +131,32 @@ export const Dashboard = () => {
             <div className="bg-blue-100 text-blue-800 p-6 rounded-lg shadow">
               <h3 className="text-2xl font-bold">28</h3>
 
-              <p>Usuarios Registrados</p>
+              <p>Registered Users</p>
             </div>
 
             <div className="bg-green-100 text-green-800 p-6 rounded-lg shadow">
               <h3 className="text-2xl font-bold">12</h3>
 
-              <p>Órdenes Activas</p>
+              <p>Active Orders</p>
             </div>
 
             <div className="bg-yellow-100 text-yellow-800 p-6 rounded-lg shadow">
               <h3 className="text-2xl font-bold">4</h3>
 
-              <p>Reportes Pendientes</p>
+              <p>Pending Reports</p>
             </div>
           </section>
 
           <section className="py-16 px-6 bg-blue-600 text-white text-center">
             <h3 className="text-2xl font-semibold mb-4">
-              ¿Necesitas soporte como administrador?
+              Need support as an administrator?
             </h3>
 
             <Link
               to="/contact"
               className="px-6 py-3 bg-white hover:bg-blue-100 text-blue-600 font-semibold rounded-full shadow transition"
             >
-              Contáctanos
+              Contact us
             </Link>
           </section>
         </main>
@@ -218,18 +218,18 @@ export const Dashboard = () => {
 
           <section className="py-16 px-6 bg-blue-600 text-white text-center">
             <h3 className="text-2xl font-semibold mb-4">
-              ¿Necesitas ayuda adicional?
+              Do you need additional help?
             </h3>
 
             <p className="mb-6">
-              Contáctanos para resolver cualquier duda o solicitar soporte.
+              Contact us to resolve any questions or request support.
             </p>
 
             <Link
               to="/contact"
               className="px-6 py-3 bg-white hover:bg-blue-100 text-blue-600 font-semibold rounded-full shadow transition"
             >
-              Contáctanos
+              Contact us
             </Link>
           </section>
         </main>

@@ -8,30 +8,30 @@ import {
 
 const services = [
   {
-    title: "Asesorías",
+    title: "Consultancies",
     description:
-      "Recibe acompañamiento profesional en tecnología, sistemas y productividad digital.",
+      "Receive professional support in technology, systems, and digital productivity.",
     icon: <FaUserTie className="text-4xl text-blue-600" />,
     to: "consultancies",
   },
   {
-    title: "Servicio Técnico",
+    title: "Technical Service",
     description:
-      "Diagnóstico, reparación y mantenimiento de equipos con garantía.",
+      "Diagnostics, repair, and maintenance of equipment with warranty.",
     icon: <FaTools className="text-4xl text-blue-600" />,
     to: "technicalService",
   },
   {
-    title: "Aplicaciones Web",
+    title: "Web Apps",
     description:
-      "Desarrollamos soluciones digitales personalizadas para tu negocio o proyecto.",
+      "We develop customized digital solutions for your business or project.",
     icon: <FaLaptopCode className="text-4xl text-blue-600" />,
     to: "webApps",
   },
   {
-    title: "Venta de Equipos",
+    title: "Equipment Sale",
     description:
-      "Compra equipos y herramientas tecnológicas confiables a buen precio.",
+      "Buy reliable technological equipment and tools at a good price.",
     icon: <FaShoppingCart className="text-4xl text-blue-600" />,
     to: "equipmentSale",
   },
@@ -58,7 +58,7 @@ export const Home = () => {
 
       <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-12">Nuestros Servicios</h2>
+          <h2 className="text-3xl font-bold mb-12">Our Services</h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {services.map((service, index) => (
@@ -80,18 +80,18 @@ export const Home = () => {
 
       <section className="py-16 px-6 bg-blue-600 text-white text-center">
         <h3 className="text-2xl font-semibold mb-4">
-          ¿Listo para optimizar tu mundo digital?
+          Ready to optimize your digital world?
         </h3>
 
         <p className="mb-6">
-          Contáctanos y recibe una asesoría inicial sin costo.
+          Contact us and receive a free initial consultation.
         </p>
 
         <Link
           to="/contact"
           className="px-6 py-3 bg-white hover:bg-blue-100 text-blue-600 font-semibold rounded-full shadow transition"
         >
-          Contáctanos
+          Contact us
         </Link>
       </section>
     </main>

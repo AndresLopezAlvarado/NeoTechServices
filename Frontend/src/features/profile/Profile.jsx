@@ -45,12 +45,10 @@ export const Profile = () => {
   const handlePictureChange = async (e) => {
     const newPicture = e.target.files[0];
     if (!newPicture) return;
-    console.log(newPicture);
 
     try {
       const uploadedPicture = await uploadToCloudinary(newPicture);
       if (!uploadedPicture) return;
-      console.log(uploadedPicture);
 
       const { data } = await toast.promise(
         updatePicture({ newPicture: uploadedPicture }),
@@ -60,8 +58,6 @@ export const Profile = () => {
           error: <b>Error uploading picture.</b>,
         }
       );
-
-      console.log(data);
 
       dispatch(setUser(data));
     } catch (error) {
