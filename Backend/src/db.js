@@ -6,7 +6,9 @@ export const connectDB = async () => {
     const connection = await mongoose.connect(MONGODB_URL);
 
     if (connection)
-      console.log(`☁️  MongoDB Atlas: connected to "${connection.connection.name}"`);
+      console.log(
+        `☁️  MongoDB Atlas: connected to "${connection.connection.name}"`
+      );
   } catch (error) {
     console.error({
       message:
@@ -14,10 +16,9 @@ export const connectDB = async () => {
       error: error,
     });
 
-    throw new Error({
-      message:
-        "Something went wrong on the connection (connectDB) to the database.",
-      error: error,
-    });
+    throw new Error(
+      "Something went wrong on the connection (connectDB) to the database. " +
+        error.message
+    );
   }
 };

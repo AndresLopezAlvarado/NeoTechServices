@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectToken } from "../auth/authSlice";
-import { useGetUsersQuery, useUpdateRoleMutation } from "../api/authApi";
+import { useGetUsersQuery, useUpdateRoleMutation } from "./usersEndpoints";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 

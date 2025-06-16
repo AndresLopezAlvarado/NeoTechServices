@@ -16,7 +16,9 @@ export const uploadPicture = async (pictureUrl, pictureName) => {
       pictureUrl.includes("gravatar.com") ||
       pictureUrl.includes("auth0.com/avatars")
     )
-      pictureUrl = noProfilePicture;
+      return { secure_url: noProfilePicture, public_id: null };
+
+    new URL(pictureUrl);
 
     const { secure_url, public_id } = await cloudinary.uploader.upload(
       pictureUrl,
@@ -32,6 +34,7 @@ export const uploadPicture = async (pictureUrl, pictureName) => {
 
 export const deletePicture = async (public_id) => {
   try {
+    if (!public_id) return;
     await cloudinary.uploader.destroy(public_id, { invalidate: true });
   } catch (error) {
     console.error("Error deleting picture:", error);

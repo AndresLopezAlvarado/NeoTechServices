@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser, setUser } from "../features/auth/authSlice.js";
+import { selectUser, setUser } from "../auth/authSlice.js";
 import {
-  useUpdateProfileMutation,
   useUpdatePictureMutation,
-} from "../features/api/authApi.js";
+  useUpdateProfileMutation,
+} from "./profileEndpoints.js";
 import { useEffect, useState } from "react";
-import { CLOUD_NAME, UPLOAD_PRESET } from "../../config.js";
+import { CLOUD_NAME, UPLOAD_PRESET } from "../../../config.js";
 import toast, { Toaster } from "react-hot-toast";
 
 const uploadToCloudinary = async (newPicture) => {

@@ -4,7 +4,7 @@ import { Layout } from "./components/Layout.jsx";
 import { Home } from "./pages/Home.jsx";
 import { ProtectedRoutes } from "./features/auth/ProtectedRoutes.jsx";
 import { Dashboard } from "./pages/Dashboard.jsx";
-import { Profile } from "./pages/Profile.jsx";
+import { Profile } from "./features/profile/Profile.jsx";
 import { Users } from "./features/users/Users.jsx";
 import { WebApps } from "./pages/WebApps.jsx";
 import { TechnicalService } from "./pages/TechnicalService.jsx";

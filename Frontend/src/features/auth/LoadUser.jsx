@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser, setToken, setUser } from "./authSlice";
-import { useLoadUserMutation } from "../api/authApi";
+import { useLoadUserMutation } from "./authEndpoints.js";
 import { useEffect } from "react";
 import { Loader } from "../../components/Loader.jsx";
 

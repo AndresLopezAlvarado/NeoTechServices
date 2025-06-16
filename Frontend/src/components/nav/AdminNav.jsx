@@ -1,5 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router";
+import { clearState } from "../../features/auth/authSlice";
 
 export const AdminNav = ({ picture }) => {
   const { logout } = useAuth0();
@@ -123,9 +124,12 @@ export const AdminNav = ({ picture }) => {
 
             <li>
               <button
-                onClick={() =>
-                  logout({ logoutParams: { returnTo: window.location.origin } })
-                }
+                onClick={() => {
+                  clearState();
+                  logout({
+                    logoutParams: { returnTo: window.location.origin },
+                  });
+                }}
               >
                 Cerrar sesión
               </button>
